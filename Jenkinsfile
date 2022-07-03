@@ -1,5 +1,3 @@
-/* import shared library */
-@Library('shared-library')_
 pipeline {
      environment {
        ID_DOCKER = "bidou974"
@@ -56,7 +54,7 @@ pipeline {
           steps {
              script {
                sh '''
-                   #echo $DOCKERHUB_PASSWORD_PSW = credentials('dockerHub') | docker login -u $ID_DOCKER --password-stdin
+                   // echo $DOCKERHUB_PASSWORD_PSW = credentials('dockerHub') | docker login -u $ID_DOCKER --password-stdin
 				   docker login -u bidou974 -p kotadoc974
                    docker push ${ID_DOCKER}/$IMAGE_NAME:$IMAGE_TAG
                '''
@@ -105,13 +103,14 @@ pipeline {
           }
         }
      }
-	     
-  post {
-    always {
-      script {
-        slackNotifier currentBuild.result
-      }
-    }  
   }
-  }
+	post {
+	   success {
+		 slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+		 }
+	  failure {
+			slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+		  }   
+	}
+  
 }
