@@ -1,2 +1,1 @@
-test badging
-[![Build Status](http://192.168.88.10:8080/buildStatus/icon?job=deployment_BartSimpson_Badge)](http://192.168.88.10:8080/job/deployment_BartSimpson_Badge/)
+[![Build Status](https://edad-86-215-59-60.eu.ngrok.io/buildStatus/icon?job=deployment_BartSimpson_Badge)](https://edad-86-215-59-60.eu.ngrok.io/job/deployment_BartSimpson_Badge/)
